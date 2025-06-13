@@ -1,0 +1,295 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+body , html {
+    background-color: rgb(0, 0, 0);
+    color: white;
+}
+#Navbar{
+    border-bottom: 1px solid gray;
+    height: 80px;
+    box-shadow: 0 3px 10px gray;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#Icon{
+    border: 1px solid rgb(0, 255, 0);
+    box-shadow: 0 0 10px rgb(0, 255, 0);
+    background-color: rgb(28, 156, 28);
+    height: 50px ;
+    width: 150px;
+    border-radius: 15px;
+    text-align: center;
+    padding-top: 15px;
+    font-size: larger;
+}
+#NavButtons{
+    display: flex;
+    gap: 80px;
+    margin-top: 10px;
+  
+}
+#NavButtons > div{
+   
+    text-align: center;
+    padding: 15px;
+    padding-top: 30px;
+    border-radius:15px 15px 0 0 ;
+     transition: all 0.3s;
+     cursor: pointer;
+}
+#NavButtons > div:hover{
+    text-decoration:underline;
+      box-shadow: 0 0 10px rgb(0, 255, 0);
+    background-color: rgb(28, 156, 28);
+}
+#Container{
+    height: auto;
+    width: 100vw;
+    
+    max-height: 1000px;
+    display: flex;
+}
+#playlist{
+    background-color: rgb(17, 17, 17);
+    margin: 50px;
+    border: 3px solid #0c0c0c;
+    border-radius: 5px;
+    height: 500px;
+    box-shadow: 0 0 5px #9e9e9e;
+    width: 30%;
+
+}
+.header{
+    background-color: black;
+    width: 100%;
+    height:15%;
+    padding: 10px;
+    text-align: center;
+    border-radius: 5px 5px 0 0; 
+}
+.title{
+    height: 30%;
+}
+#Facts{
+     padding: 21px;
+}
+#PlaylistCont{
+    width:100%;
+    height:85% ;
+    background-color: rgb(31, 31, 31);
+    overflow-y: scroll; /*to be changed */
+   overflow-x: hidden;
+   
+}
+
+.music-box {
+    padding: 5px;
+  border: 2px solid white;
+  margin: 5px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background-color: #1a1a1a;
+  color: white;
+  width: 95%;
+}
+
+.marquee-container {
+  flex-grow: 1;
+}
+
+marquee {
+  display: block;
+  margin-bottom: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+.pause-btn {
+  padding: 10px 10px;
+  margin-right: 15px;
+  border: 2px solid white;
+  background: transparent;
+  color: white;
+  font-size: 16px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+#MusicPlayer{
+    background-color: rgb(17, 17, 17);
+    margin: 50px;
+    border: 3px solid #0c0c0c;
+    border-radius: 5px;
+    height: 500px;
+    width: 28%;
+    display: flex;
+    box-shadow: 0 0 5px #9e9e9e;
+    align-items: center;
+    flex-direction: column;
+}
+#FactContainer{
+     background-color: rgb(17, 17, 17);
+    margin: 50px;
+    border: 3px solid #0c0c0c;
+    border-radius: 5px;
+    height: 250px;
+    width: 25%;
+    display: flex;
+    box-shadow: 0 0 5px #9e9e9e;
+   
+    align-items: center;
+    flex-direction: column;
+}
+#Img{
+    margin-top: 40px;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+#Img > img{
+    height: 200px;
+    width: 200px;
+    border-radius: 10px;
+    filter: grayscale(100%);
+    transition: all 0.3s;
+}
+#Details{
+    width: 100%;
+    /* border: 1px solid red; */
+    padding: 10px;
+
+}
+#Details > p{
+    font-size: 10px;
+}
+#Controls{
+    background-color: #0c0c0c;
+    color: white;
+    padding: 15px;
+    margin: 10px;
+    border-radius: 5px;
+}
+#seek-slider {
+  flex: 1;
+  accent-color: #00ffff;
+  
+}
+#play-pause{
+    padding: 5px;
+    background-color: #0c0c0c;
+    color: white;
+    font-size: xx-large;
+    border: 0;
+}
+  
+
+@keyframes MusicBoost {
+    0%{
+         box-shadow: 0 0 0px white;
+    }
+    25%{
+         box-shadow: 0 0 20px white;
+    }
+    50%{
+         box-shadow: 0 0 40px white;
+    }
+    75%{
+         box-shadow: 0 0 20px white;
+    }
+    100%{
+         box-shadow: 0 0 0px white;
+    }
+    
+}
+
+/* For tablets and small desktops */
+@media (max-width: 1024px) {
+  #Container{
+    flex-wrap: wrap;
+     
+  }
+  .music-box {
+    flex-direction: column;
+    padding: 16px;
+    gap: 8px;
+  }
+
+  marquee {
+    font-size: 0.95rem;
+    padding: 8px;
+  }
+
+  .pause-btn {
+    font-size: 0.95rem;
+    padding: 8px 16px;
+  }
+}
+
+/* For large phones and small tablets */
+@media (max-width: 768px) {
+    #playlist , #MusicPlayer , #FactContainer{
+        width: 80%;
+    }
+
+
+  .music-box {
+    flex-direction: column;
+   
+    padding: 14px;
+  }
+
+  marquee {
+    font-size: 0.9rem;
+    padding: 7px;
+  }
+
+  .pause-btn {
+    font-size: 0.9rem;
+    padding: 7px 14px;
+  }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+  .music-box {
+    border-radius: 12px;
+    padding: 12px;
+  }
+
+  marquee {
+    font-size: 0.85rem;
+    padding: 6px;
+  }
+
+  .pause-btn {
+    font-size: 0.85rem;
+    padding: 6px 12px;
+  }
+}
+
+/* For extra small devices (e.g., very old phones) */
+@media (max-width: 360px) {
+  .music-box {
+    padding: 10px;
+  }
+
+  marquee {
+    font-size: 0.8rem;
+    padding: 5px;
+  }
+
+  .pause-btn {
+    font-size: 0.8rem;
+    padding: 5px 10px;
+  }
+}
