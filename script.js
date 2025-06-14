@@ -223,13 +223,12 @@ function SongBarUI(SName, Singer, Sfact, idx) {
       SingerName.textContent = Singer;
       MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
       PlayPause.innerHTML = "⏸";
-      console.log(SName);
-      console.log(Audio.duration);
       Facts.innerHTML = `${Sfact}`;
       PresentSongIndex = idx;
     };
   } catch (error) {
     console.log("Error : ", error);
+    return error
   }
 
   // Append everything to music box
@@ -258,7 +257,6 @@ Audio.addEventListener("loadedmetadata", () => {
 PlayPause.onclick = (e) => {
   if (PlayPause.innerHTML == "⏵") {
     MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
-
     PlayPause.innerHTML = "⏸";
     Audio.play();
   } else {
@@ -277,9 +275,7 @@ Slider.addEventListener("input", () => {
 
 // Next Song Event
 Next.onclick = (e) => {
-  console.log(PresentSongIndex);
   let songDex = PresentSongIndex + 1;
-  console.log(SongData[songDex].src);
   MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
   PlayPause.innerHTML = "⏸";
   SingerName.textContent = SongData[songDex].Singer;
@@ -294,9 +290,7 @@ Next.onclick = (e) => {
 
 //Previous Song Event
 Previous.onclick = (e) => {
-  console.log(PresentSongIndex);
   let songDex = PresentSongIndex - 1;
-  console.log(SongData[songDex].src);
   SingerName.textContent = SongData[songDex].Singer;
   Songname.textContent = SongData[songDex].src;
   Facts.textContent = SongData[songDex].Fact;
