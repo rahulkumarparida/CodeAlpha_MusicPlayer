@@ -156,21 +156,21 @@ let SongData = [
   },
 ];
 
-//Variables
-let SongsCont = document.getElementById("PlaylistCont")
-let MusicPlayer = document.getElementById("MusicPlayer");
-let PlayPause = document.getElementById("play-pause");
-let Audio = document.getElementById("audio");
-let Slider = document.getElementById("seek-slider");
-let currTime = document.getElementById("current-time");
-let duration = document.getElementById("duration");
-let MusicImage = document.getElementById("MusicImage");
-let Songname = document.getElementById("Songname")  
-let SingerName = document.getElementById("SingerName")  
-let Facts = document.getElementById("Facts")
-
-
-
+//Required Global Variables
+const SongsCont = document.getElementById("PlaylistCont");
+const MusicPlayer = document.getElementById("MusicPlayer");
+const PlayPause = document.getElementById("play-pause");
+const Audio = document.getElementById("audio");
+const Slider = document.getElementById("seek-slider");
+const currTime = document.getElementById("current-time");
+const duration = document.getElementById("duration");
+const MusicImage = document.getElementById("MusicImage");
+const Songname = document.getElementById("Songname");
+const SingerName = document.getElementById("SingerName");
+const Facts = document.getElementById("Facts");
+const Next = document.getElementById("next");
+const Previous = document.getElementById("previous");
+let PresentSongIndex = -1;
 //Methods
 function formatTime(timeInSeconds) {
   const minutes = Math.floor(timeInSeconds / 60);
@@ -181,7 +181,7 @@ function formatTime(timeInSeconds) {
 }
 
 // Playlist
-function SongBarUI(SName,Singer , Sfact){
+function SongBarUI(SName, Singer, Sfact, idx) {
   // Create main container
   const musicBox = document.createElement("div");
   musicBox.className = "music-box";
@@ -214,59 +214,45 @@ function SongBarUI(SName,Singer , Sfact){
   pauseBtn.className = "pause-btn";
   pauseBtn.textContent = "⏵";
 
+  // Functionality of the Pause-Play Button
   try {
-    pauseBtn.onclick = (e)=>{
-    Audio.setAttribute("src" , `./Music_Folder/${SName}`)
-    Audio.play()
-    Songname.textContent = SName
-    SingerName.textContent = Singer
-  MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
-    PlayPause.innerHTML = "⏸";
-    console.log(SName);
-    console.log(Audio.duration);
-  Facts.innerHTML = `${Sfact}`
-
-  }
+    pauseBtn.onclick = (e) => {
+      Audio.setAttribute("src", `./Music_Folder/${SName}`);
+      Audio.play();
+      Songname.textContent = SName;
+      SingerName.textContent = Singer;
+      MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+      PlayPause.innerHTML = "⏸";
+      console.log(SName);
+      console.log(Audio.duration);
+      Facts.innerHTML = `${Sfact}`;
+      PresentSongIndex = idx;
+    };
   } catch (error) {
-
-    console.log("Error : ",error);
-    
+    console.log("Error : ", error);
   }
 
   // Append everything to music box
   musicBox.appendChild(marqueeContainer);
   musicBox.appendChild(pauseBtn);
 
-
+  Audio.preLoad = "metadata";
 
   // Append music box to body or any other container
-    return musicBox
+  return musicBox;
 }
 
-
- SongData.map((ele , idx)=>{
-  SongsCont.appendChild(SongBarUI(ele.src , ele.Singer , ele.Fact)) 
-   
-})
-
-
-
-
-
-
-
+// Playlist Data 
+SongData.map((ele, idx) => {
+  SongsCont.appendChild(SongBarUI(ele.src, ele.Singer, ele.Fact, idx));
+});
 
 // Music Player
-
-
-
 Audio.addEventListener("timeupdate", () => {
   Slider.value = (Audio.currentTime / Audio.duration) * 100;
   currTime.textContent = formatTime(Audio.currentTime);
 });
 Audio.addEventListener("loadedmetadata", () => {
-  
-
   duration.textContent = formatTime(Audio.duration);
 });
 PlayPause.onclick = (e) => {
@@ -281,8 +267,44 @@ PlayPause.onclick = (e) => {
     Audio.pause();
   }
 };
-Slider.onclick = (e) => {
+
+// CurrentTime Change Function
+Slider.addEventListener("input", () => {
   Audio.currentTime = (Slider.value / 100) * audio.duration;
+});
+
+
+
+// Next Song Event
+Next.onclick = (e) => {
+  console.log(PresentSongIndex);
+  let songDex = PresentSongIndex + 1;
+  console.log(SongData[songDex].src);
+  MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+  PlayPause.innerHTML = "⏸";
+  SingerName.textContent = SongData[songDex].Singer;
+  Songname.textContent = SongData[songDex].src;
+  Facts.textContent = SongData[songDex].Fact;
+  Audio.src = `./Music_Folder/${SongData[songDex].src}`;
+  setTimeout(() => {
+    Audio.play();
+  }, 500);
+  PresentSongIndex = songDex;
 };
 
-
+//Previous Song Event
+Previous.onclick = (e) => {
+  console.log(PresentSongIndex);
+  let songDex = PresentSongIndex - 1;
+  console.log(SongData[songDex].src);
+  SingerName.textContent = SongData[songDex].Singer;
+  Songname.textContent = SongData[songDex].src;
+  Facts.textContent = SongData[songDex].Fact;
+  MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+  PlayPause.innerHTML = "⏸";
+  Audio.src = `./Music_Folder/${SongData[songDex].src}`;
+  setTimeout(() => {
+    Audio.play();
+  }, 500);
+  PresentSongIndex = songDex;
+};

@@ -3,53 +3,59 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
     <link rel="stylesheet" href="style.css" />
     <title>Music Player</title>
   </head>
   <body>
+
     <div id="Navbar">
       <div id="Icon">Music Play</div>
     </div>
+
     <div id="Container">
-
-
-      <div id="playlist">
-          <div class="header">
-            <h1>Playlist</h1>
-          </div>
-          <div id="PlaylistCont">
-          <!-- SOngs -->
-          </div>
-      </div>
-
 
       <div id="MusicPlayer">
         <div class="header">
-          <marquee id="Songname" behavior="scroll" >SongName</marquee>
+          <marquee id="Songname" behavior="scroll">SongName</marquee>
           <marquee id="SingerName">SingerName</marquee>
         </div>
         <div id="Img">
           <img id="MusicImage" src="./Images/Music image.webp" alt="" />
         </div>
-        <div id="Details">
-        
-        </div>
+        <div id="Details"></div>
         <div id="Controls">
           <button id="play-pause">⏵</button>
           <input type="range" id="seek-slider" value="-1" />
           <span id="current-time">0:00</span> / <span id="duration">0:00</span>
-          <audio
-            id="audio"
-            
-          ></audio>
+          <audio id="audio"></audio>
+        </div>
+        <div class="NextPrev">
+          <button id="previous"><i class="fa-solid fa-backward"></i></button>
+          <button id="next"><i class="fa-solid fa-forward"></i></button>
         </div>
       </div>
+
+      <div id="playlist">
+        <div class="header">
+          <h1>Playlist</h1>
+        </div>
+        <div id="PlaylistCont">
+          <!-- SOngs -->
+        </div>
+      </div>
+
       <div id="FactContainer">
         <div class="title header">Facts</div>
-        <p id="Facts">
-          
-        </p>
+        <p id="Facts"></p>
       </div>
+      
     </div>
 
     <script src="./script.js"></script>
