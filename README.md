@@ -29,7 +29,6 @@ A clean, modern, and fully responsive music player built with HTML, CSS, and Jav
 
 ---
 
-## 📁 Folder Structure
 
 
 
