@@ -170,6 +170,7 @@ const SingerName = document.getElementById("SingerName");
 const Facts = document.getElementById("Facts");
 const Next = document.getElementById("next");
 const Previous = document.getElementById("previous");
+
 let PresentSongIndex = -1;
 //Methods
 function formatTime(timeInSeconds) {
@@ -191,17 +192,13 @@ function SongBarUI(SName, Singer, Sfact, idx) {
   marqueeContainer.className = "marquee-container";
 
   // Create song name marquee
-  const songMarquee = document.createElement("marquee");
+  const songMarquee = document.createElement("p");
   songMarquee.className = "song-name";
-  songMarquee.setAttribute("behavior", "scroll");
-  songMarquee.setAttribute("direction", "left");
   songMarquee.textContent = SName;
 
   // Create singer name marquee
-  const singerMarquee = document.createElement("marquee");
+  const singerMarquee = document.createElement("p");
   singerMarquee.className = "singer-name";
-  singerMarquee.setAttribute("behavior", "scroll");
-  singerMarquee.setAttribute("direction", "left");
   // singerMarquee.setAttribute("scrolldelay", "80ms");
   singerMarquee.textContent = Singer;
 
@@ -222,6 +219,7 @@ function SongBarUI(SName, Singer, Sfact, idx) {
       Songname.textContent = SName;
       SingerName.textContent = Singer;
       MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+      MusicImage.play()
       PlayPause.innerHTML = "⏸";
       Facts.innerHTML = `${Sfact}`;
       PresentSongIndex = idx;
@@ -257,11 +255,13 @@ Audio.addEventListener("loadedmetadata", () => {
 PlayPause.onclick = (e) => {
   if (PlayPause.innerHTML == "⏵") {
     MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+    MusicImage.play()
     PlayPause.innerHTML = "⏸";
     Audio.play();
   } else {
     PlayPause.innerHTML = "⏵";
     MusicImage.style.animation = "none";
+    MusicImage.pause()
     Audio.pause();
   }
 };
@@ -277,6 +277,7 @@ Slider.addEventListener("input", () => {
 Next.onclick = (e) => {
   let songDex = PresentSongIndex + 1;
   MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+  MusicImage.play()
   PlayPause.innerHTML = "⏸";
   SingerName.textContent = SongData[songDex].Singer;
   Songname.textContent = SongData[songDex].src;
@@ -295,6 +296,7 @@ Previous.onclick = (e) => {
   Songname.textContent = SongData[songDex].src;
   Facts.textContent = SongData[songDex].Fact;
   MusicImage.style.animation = "MusicBoost 0.8s infinite ease-in-out";
+  MusicImage.play()
   PlayPause.innerHTML = "⏸";
   Audio.src = `./Music_Folder/${SongData[songDex].src}`;
   setTimeout(() => {
